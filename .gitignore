@@ -1,0 +1,4 @@
+data/raw/
+data/noisy/
+__pycache__/
+*.pyc

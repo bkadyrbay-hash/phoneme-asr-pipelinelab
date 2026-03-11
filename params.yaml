@@ -1,0 +1,16 @@
+langs:
+- en
+- fr
+n_utterances: 50
+noise_seed: 42
+snr_levels:
+- 40
+- 30
+- 20
+- 15
+- 10
+- 5
+- 0
+- -5
+- -10
+- -15
