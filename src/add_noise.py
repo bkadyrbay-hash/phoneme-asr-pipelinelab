@@ -29,7 +29,7 @@ def main():
     snr_str = str(int(args.snr_db)).replace('-', 'neg')
     def process(rec):
         out_wav = os.path.join(args.output_dir, f"{rec['utt_id']}_snr{snr_str}.wav")
-        add_noise_to_file(rec['wav_path'], out_wav, args.snr_db, seed=args.seed + abs(hash(rec['utt_id'])) % (2**31))
+        add_noise_to_file(rec['wav_path'], out_wav, args.snr_db, seed=args.seed + int(hashlib.md5(rec['utt_id'].encode()).hexdigest(), 16) % (2**31))
         return {**rec, 'wav_path': out_wav, 'snr_db': args.snr_db}
     noisy = list(map(process, records))
     tmp = args.output_manifest + '.tmp'

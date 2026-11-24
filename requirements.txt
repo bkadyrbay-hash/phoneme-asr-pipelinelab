@@ -1,0 +1,10 @@
+torch>=2.2
+torchaudio>=2.2
+transformers>=4.40
+librosa>=0.10
+soundfile>=0.12
+numpy>=1.26
+jiwer>=3.0
+phonemizer>=3.2
+matplotlib>=3.8
+pyyaml>=6.0

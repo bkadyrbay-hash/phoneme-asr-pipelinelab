@@ -12,7 +12,7 @@ def main():
     data = {}
     for mf in metric_files:
         with open(mf) as f: m = json.load(f)
-        data.setdefault(m['lang'], {})[m['snr_db']] = m['mean_per']
+        data.setdefault(m['lang'], {})[m['snr_db']] = m['per']
     fig, ax = plt.subplots(figsize=(10, 6))
     colors = ['#2196F3', '#E91E63', '#4CAF50']
     all_pers_by_snr = {}

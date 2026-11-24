@@ -12,8 +12,15 @@ A reproducible DVC-style pipeline that adds Gaussian noise to speech at 10 level
 
 Parameters are in `params.yaml`, per-level metrics in `results/metrics/`, the plot in `results/figures/per_vs_snr.png`. Audio is tracked with DVC and is not in this repository.
 
-## Known issue
+## Scoring
 
-The stored error rates should not be read as phoneme error rates. They are around 3.6 on clean audio, and a real PER should not behave like that. `evaluate.py` applies `jiwer.wer` to phoneme strings, which counts space-separated units, so the most likely cause is that references and predictions are split differently. The rate then falls to 1.0 at the lowest SNR levels, consistent with empty output. Scoring per phoneme is the fix, and the results need recomputing.
+The error rate is computed over IPA symbols with spaces removed (`src/evaluate.py`). An earlier version applied WER to the phoneme strings; espeak separates words with spaces while the model separates phonemes, so that number was not a phoneme error rate. Results from that version were removed: run the pipeline again to regenerate `results/`.
 
-The noise seed also uses Python's `hash()`, which changes between runs unless `PYTHONHASHSEED` is set.
+Noise is seeded per utterance from a stable hash of its id, so runs are reproducible.
+
+## Run it
+
+```bash
+pip install -r requirements.txt
+# put the audio and manifests where params.yaml points, then run the scripts in the order above
+```
